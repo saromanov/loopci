@@ -35,6 +35,9 @@ class Loopci:
         #os.chdir(current_dir)
         logging.info("Start construction of Dockerfile")
         cons = construct.Construct("Fun construction")
+        if 'image' not in conf:
+            #Build with default image
+            cons = construct.RestrictConstruct("Fun construction")
         for key, value in conf.items():
             if key == 'language':
                 cons.addLanguage(value)
