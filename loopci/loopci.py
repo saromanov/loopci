@@ -36,11 +36,13 @@ class Loopci:
         logging.info("Start construction of Dockerfile")
         cons = construct.Construct("Fun construction")
         for key, value in conf.items():
-            print(key, value)
             if key == 'language':
                 cons.addLanguage(value)
             if key == 'image':
-                cons.addOS(value['name'], version=value['version'])
+                if 'version' in value:
+                    cons.addOS(value['name'], version=value['version'])
+                else:
+                    const.addOS(value['name'])
         cons.createDockerfile('.')
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
