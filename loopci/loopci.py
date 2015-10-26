@@ -6,6 +6,8 @@ import math
 import logging
 
 import docker
+import construct
+from config import loadConfig
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -23,11 +25,23 @@ class Loopci:
         logging.debug("Checking directory")
         if self._dirExist(path) is False:
             raise Exception("Directory {0} is not exist".format(path))
-        current_dir = self._createDir()
-        os.chdir(current_dir)
-        cons = Construct("Fun construction")
-        dock = Docker()
-        dock.start('.')
-        manager = docker.DockerManager()
+        logging.debug("Load configuration")
+        conf = loadConfig(path)
+        if len(conf) == 0:
+            logging.error(".loopci.hcl is empty")
+            return
+
+        #current_dir = self._createDir()
+        #os.chdir(current_dir)
+        logging.info("Start construction of Dockerfile")
+        cons = construct.Construct("Fun construction")
+        for key, value in conf.items():
+            print(key, value)
+            if key == 'language':
+                cons.addLanguage(value)
+            if key == 'image':
+                cons.addOS(value['name'], version=value['version'])
+        cons.createDockerfile('.')
+        #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()
