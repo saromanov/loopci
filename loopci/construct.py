@@ -93,4 +93,8 @@ class RestrictConstruct(BaseConstruct):
         if title.find('node') != -1:
             self.result += 'FROM {0}'.format(title)
 
+    def addInstallPackages(self, items):
+        if len(items) == 0:
+            return
+
 
