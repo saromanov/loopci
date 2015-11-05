@@ -47,6 +47,7 @@ class Loopci:
                 else:
                     const.addOS(value['name'])
         cons.createDockerfile('.')
+        logging.info("Finished to construction Dockerfile")
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()
