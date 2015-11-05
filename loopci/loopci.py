@@ -21,10 +21,13 @@ class Loopci:
     def _dirExist(self, path):
         return os.path.isdir(path)
 
-    def run(self, path):
+    def run(self, path, outpath):
         logging.debug("Checking directory")
         if self._dirExist(path) is False:
             raise Exception("Directory {0} is not exist".format(path))
+        if self._dirExist(outpath) is False:
+            os.mkdir(outpath)
+
         logging.debug("Load configuration")
         conf = loadConfig(path)
         if len(conf) == 0:
@@ -46,7 +49,7 @@ class Loopci:
                     cons.addOS(value['name'], version=value['version'])
                 else:
                     const.addOS(value['name'])
-        cons.createDockerfile('.')
+        cons.createDockerfile(outpath)
         logging.info("Finished to construction Dockerfile")
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
