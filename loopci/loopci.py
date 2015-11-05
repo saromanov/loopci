@@ -49,6 +49,8 @@ class Loopci:
                     cons.addOS(value['name'], version=value['version'])
                 else:
                     const.addOS(value['name'])
+            if key == 'install':
+                cons.addInstallPackages(key)
         cons.createDockerfile(outpath)
         logging.info("Finished to construction Dockerfile")
         #manager = docker.DockerManager()
