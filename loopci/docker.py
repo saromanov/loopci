@@ -11,6 +11,11 @@ class DockerManager:
         '''
         pass
 
+    def cp(self, path, contname):
+         dockercp = sh.Command('docker')
+         dockercp('cp', path, contname + ':/dir1')
+
+
     def build(self, path):
         ''' build end run docker image
         '''
