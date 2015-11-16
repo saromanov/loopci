@@ -15,10 +15,10 @@ class DockerManager:
         ''' build end run docker image
         '''
         os.chdir(path)
-        dockerbuild = sh.Command('docker build -n first/image .')
-        dockerbuild()
+        dockerbuild = sh.Command('docker')
+        dockerbuild('build', '-t', 'first/image', path)
 
     def start(self):
         #Run image
-        dockerrun = sh.Command('docker run -i -t first/image')
-        dockerrun()
+        dockerrun = sh.Command('docker')
+        dockerrun('run', '-i', '-d', 'first/image')
