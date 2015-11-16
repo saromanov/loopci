@@ -11,12 +11,14 @@ class DockerManager:
         '''
         pass
 
-    def start(path):
+    def build(self, path):
         ''' build end run docker image
         '''
         os.chdir(path)
         dockerbuild = sh.Command('docker build -n first/image .')
         dockerbuild()
+
+    def start(self):
         #Run image
         dockerrun = sh.Command('docker run -i -t first/image')
         dockerrun()
