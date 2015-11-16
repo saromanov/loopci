@@ -21,4 +21,10 @@ class DockerManager:
     def start(self):
         #Run image
         dockerrun = sh.Command('docker')
-        dockerrun('run', '-i', '-d', 'first/image')
+        print(dockerrun('run', '-i', '-d', 'first/image'))
+
+    def kill(self, id):
+        ''' Kill image by id
+        '''
+        dockerkill = sh.Command('docker')
+        dockerkill('kill', id)
