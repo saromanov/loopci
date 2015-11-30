@@ -1,15 +1,14 @@
 import os
 import sh
 
+#TODO. Need to use Docker client
 
 class DockerManager:
     ''' This class provides all about management with docker
         This class starts after construction of Dockerfile
     '''
     def __init__(self, *args, **kwargs):
-        ''' TODO: Provide options for create of container
-        '''
-        pass
+        self.config = kwargs.get('config')
 
     def cp(self, path, contname):
          dockercp = sh.Command('docker')
