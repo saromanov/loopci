@@ -1,3 +1,4 @@
+import os
 
 # Construct docker file
 
@@ -80,18 +81,30 @@ class RestrictConstruct(BaseConstruct):
     def __init__(self, descr):
         BaseConstruct.__init__(self)
         self.result = ''
+        self.username = 'default'
+
+    def copy_dir(self, path):
+        if os.path.isdir(path) is False:
+            raise Exception("{0} is not directory".format(path))
+        outpath = '/usr/loopci/{0}'.format(self.username)
+        dirname = os.path.dirname(path)
+        splitter = dirname.split('/')
+        if len(splitter) == 0:
+            raise Exception("Something went wrong with getting name of directory")
+        self.result += 'ADD {0} {1}\n'.format(path, outpath + '/' + splitter[-1])
 
     def addLanguage(self, title):
         if title.find('go') != -1:
             lang = "golang"
             version = title.split(':')[1]
-            self.result += 'FROM {0}:{1}'.format(lang, version)
+            self.result += 'FROM {0}:{1}\n'.format(lang, version)
 
         if title.find('python') != -1:
-            self.result += 'FROM {0}'.format(title)
+            self.result += 'FROM {0}\n'.format(title)
 
         if title.find('node') != -1:
-            self.result += 'FROM {0}'.format(title)
+            self.result += 'FROM {0}\n'.format(title)
+            self.result += 'RUN w'
 
     def addInstallPackages(self, items):
         if len(items) == 0:
