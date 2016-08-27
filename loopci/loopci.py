@@ -42,6 +42,8 @@ class Loopci:
         if 'image' not in conf:
             #Build with default image
             cons = construct.RestrictConstruct("Fun construction")
+
+        #TODO: need to leave from iteration
         for key, value in conf.items():
             if key == 'language':
                 cons.addLanguage(value)
