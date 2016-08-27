@@ -38,6 +38,7 @@ class Loopci:
         #os.chdir(current_dir)
         logging.info("Start construction of Dockerfile")
         cons = construct.Construct("Fun construction")
+        print(conf)
         if 'image' not in conf:
             #Build with default image
             cons = construct.RestrictConstruct("Fun construction")
@@ -49,15 +50,18 @@ class Loopci:
                     cons.addOS(value['name'], version=value['version'])
                 else:
                     const.addOS(value['name'])
+            if key == "before_install":
+                for script_key, script_value in value.items():
+                    cons.addScript(script_key, script_value)
             if key == 'install':
                 cons.addInstallPackages(key)
         cons.createDockerfile(outpath)
-        logging.info("Finished to construction Dockerfile")
+        '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
         dockermanager.build(outpath)
         logging.info("Start Docker container")
-        dockermanager.start()
+        dockermanager.start()'''
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()

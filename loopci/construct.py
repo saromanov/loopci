@@ -70,6 +70,9 @@ class Construct(BaseConstruct):
         self.result += "{0}\n".format(strdata)
         return strdata
 
+    def addScript(self, title):
+        strdata +=  'RUN {0}'.format(title)
+
     def addService(self, title):
         pass
 
@@ -108,6 +111,10 @@ class RestrictConstruct(BaseConstruct):
         if title.find('node') != -1:
             self.result += 'FROM {0}\n'.format(title)
             self.result += 'RUN w'
+
+    def addScript(self, key, title):
+        self.result += 'RUN echo "Execution of the command {0}"\n'.format(key)
+        self.result +=  'RUN {0}\n'.format(title)
 
     def addInstallPackages(self, items):
         if len(items) == 0:
