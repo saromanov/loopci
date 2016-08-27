@@ -26,7 +26,7 @@ class Construct(BaseConstruct):
 
         #Set default os
         self.ostitle = "Ubuntu"
-        self.osver = "14.04"
+        self.osver = "16.04"
         self.commands = {}
 
     def addOS(self, title, version='latest'):
