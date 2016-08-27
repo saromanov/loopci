@@ -56,7 +56,7 @@ class Loopci:
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
         dockermanager.build(outpath)
-        logging.info("Start tDocker container")
+        logging.info("Start Docker container")
         dockermanager.start()
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
