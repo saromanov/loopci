@@ -62,7 +62,10 @@ class Construct(BaseConstruct):
                 strdata += 'nvm use {0}'.format(version)
 
         if title == 'go':
-            strdata += '{0} install golang'.format(install)
+            if version is not '0':
+                strdata += '{0} install golang {1}'.format(install, version)
+            else :
+                strdata += '{0} install golang'.format(install)
 
         self.result += "{0}\n".format(strdata)
         return strdata
