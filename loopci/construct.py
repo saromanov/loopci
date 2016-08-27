@@ -116,6 +116,9 @@ class RestrictConstruct(BaseConstruct):
         self.result += 'RUN echo "Execution of the command {0}"\n'.format(key)
         self.result +=  'RUN {0}\n'.format(title)
 
+    def add_env_variable(self, key, value):
+        self.result += 'RUN export {0}={1}\n'.format(key, value)
+
     def addInstallPackages(self, items):
         if len(items) == 0:
             return

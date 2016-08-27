@@ -53,6 +53,9 @@ class Loopci:
             if key == "before_install":
                 for script_key, script_value in value.items():
                     cons.addScript(script_key, script_value)
+            if key == "env":
+                for env_key, env_value in value.items():
+                    cons.add_env_variable(env_key, env_value)
             if key == 'install':
                 cons.addInstallPackages(key)
         cons.createDockerfile(outpath)
