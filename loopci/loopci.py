@@ -44,22 +44,22 @@ class Loopci:
             cons = construct.RestrictConstruct("Fun construction")
 
         #TODO: need to leave from iteration
-        for key, value in conf.items():
-            if key == 'language':
-                cons.addLanguage(value)
-            if key == 'image':
-                if 'version' in value:
-                    cons.addOS(value['name'], version=value['version'])
-                else:
-                    const.addOS(value['name'])
-            if key == "before_install":
-                for script_key, script_value in value.items():
-                    cons.addScript(script_key, script_value)
-            if key == "env":
-                for env_key, env_value in value.items():
-                    cons.add_env_variable(env_key, env_value)
-            if key == 'install':
-                cons.addInstallPackages(key)
+        value = conf['language']
+        if value is not None:
+            cons.addLanguage(value)
+        image = conf['image']
+        if image is not None:
+            if 'version' in image:
+                cons.addOS(image['name'], version=image['version'])
+            else:
+                const.addOS(image['name'])
+        before = conf['before_install']
+        for script_key, script_value in before.items():
+            cons.addScript(script_key, script_value)
+
+        env = conf['env']
+        for env_key, env_value in env.items():
+            cons.add_env_variable(env_key, env_value)
         cons.createDockerfile(outpath)
         '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
