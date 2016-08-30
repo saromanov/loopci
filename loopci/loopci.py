@@ -44,20 +44,20 @@ class Loopci:
             cons = construct.RestrictConstruct("Fun construction")
 
         #TODO: need to leave from iteration
-        value = conf['language']
+        value = getConfigItem(conf, 'language')
         if value is not None:
             cons.addLanguage(value)
-        image = conf['image']
+        image = getConfigItem(conf, 'image')
         if image is not None:
             if 'version' in image:
                 cons.addOS(image['name'], version=image['version'])
             else:
                 const.addOS(image['name'])
-        before = conf['before_install']
+        before = getConfigItem(conf, 'before_install')
         for script_key, script_value in before.items():
             cons.addScript(script_key, script_value)
 
-        env = conf['env']
+        env = getConfigItem(conf, 'env')
         for env_key, env_value in env.items():
             cons.add_env_variable(env_key, env_value)
         cons.createDockerfile(outpath)
@@ -70,3 +70,10 @@ class Loopci:
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()
+
+
+def getConfigItem(conf, name):
+    ''' getConfigItem returns None if element
+        is not found
+    '''
+    return conf[name] if name in conf else None
