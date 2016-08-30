@@ -7,6 +7,7 @@ def loadConfig(path):
         raise Exception('{0} is not found'.format(name))
     f = open(os.path.join(path, name), 'r')
     obj = hcl.load(f)
+    print(obj)
     f.close()
     return obj
 
