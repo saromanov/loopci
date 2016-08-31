@@ -50,6 +50,8 @@ class Construct(BaseConstruct):
             title = items[0]
             version = items[1]
         if title == 'python':
+            # install dependencies
+            strdata += 'pip install -r requirements.txt'
             strdata += '{0} python'.format(install)
             strdata += '{0} python-dev'.format(install)
 
