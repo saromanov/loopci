@@ -16,7 +16,7 @@ class DockerManager:
 
 
     def build(self, path):
-        ''' build end run docker image
+        ''' build and run docker image
         '''
         os.chdir(path)
         dockerbuild = sh.Command('docker')
