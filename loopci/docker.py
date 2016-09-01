@@ -1,5 +1,6 @@
 import os
 import sh
+import random
 
 #TODO. Need to use Docker client
 
@@ -15,12 +16,15 @@ class DockerManager:
          dockercp('cp', path, contname + ':/dir1')
 
 
-    def build(self, path):
+    def build(self, path, image_len=10):
         ''' build and run docker image
         '''
         os.chdir(path)
         dockerbuild = sh.Command('docker')
-        dockerbuild('build', '-t', 'first/image', path)
+        random_name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(image_len))
+        image_name = 'loopci/{0}'.format(random_name)
+        dockerbuild('build', '-t', image_name, path)
+        return image_name
 
     def start(self):
         #Run image
