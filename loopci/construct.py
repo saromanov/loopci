@@ -120,6 +120,9 @@ class RestrictConstruct(BaseConstruct):
         self.result += 'RUN echo "Execution of the command {0}"\n'.format(key)
         self.result +=  'RUN {0}\n'.format(title)
 
+    def expose_port(self, port):
+        self.result += 'EXPOSE {0}'.format(port)
+
     def add_env_variable(self, key, value):
         self.result += 'RUN export {0}={1}\n'.format(key, value)
 

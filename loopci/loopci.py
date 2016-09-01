@@ -60,7 +60,6 @@ class Loopci:
         env = getConfigItem(conf, 'env')
         for env_key, env_value in env.items():
             cons.add_env_variable(env_key, env_value)
-        cons.createDockerfile(outpath)
         '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
