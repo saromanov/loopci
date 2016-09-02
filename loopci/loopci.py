@@ -22,6 +22,10 @@ class Loopci:
         return os.path.isdir(path)
 
     def run(self, path, outpath):
+        ''' run provides a main method
+            for running. TODO: maybe need to change it
+            to another
+        '''
         logging.debug("Checking directory")
         if self._dirExist(path) is False:
             raise Exception("Directory {0} is not exist".format(path))
