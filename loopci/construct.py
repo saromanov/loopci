@@ -130,9 +130,8 @@ class RestrictConstruct(BaseConstruct):
         if len(items) == 0:
             return
     def add_workdir(self, dirname):
-        self.result += 'RUN mkdir {0}'.format(dirname)
-        self.result += 'COPY {0} .'.format(dirname)
-        self.result += 'WORDIR {0}'.format(dirname)
+        self.result += 'ADD ./ {0}\n'.format(dirname)
+        self.result += 'WORKDIR {0}\n'.format(dirname)
 
     def add_exec_script(self, script):
         self.result += 'CMD {0}\n'.format(script)
