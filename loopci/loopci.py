@@ -64,8 +64,9 @@ class Loopci:
         for env_key, env_value in env.items():
             cons.add_env_variable(env_key, env_value)
         ports = getConfigItem(conf, 'ports')
-        for port_key, port_value in ports.items():
-            cons.expose_port(port_value)
+        if isinstance(ports, list):
+            for port_key, port_value in ports.items():
+                cons.expose_port(port_value)
         cons.create_dockerfile(outpath)
         '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
