@@ -121,7 +121,7 @@ class RestrictConstruct(BaseConstruct):
         self.result +=  'RUN {0}\n'.format(title)
 
     def expose_port(self, port):
-        self.result += 'EXPOSE {0}'.format(port)
+        self.result += 'EXPOSE {0}\n'.format(port)
 
     def add_env_variable(self, key, value):
         self.result += 'RUN export {0}={1}\n'.format(key, value)
@@ -133,6 +133,9 @@ class RestrictConstruct(BaseConstruct):
         self.result += 'RUN mkdir {0}'.format(dirname)
         self.result += 'COPY {0} .'.format(dirname)
         self.result += 'WORDIR {0}'.format(dirname)
+
+    def add_exec_script(self, script):
+        self.result += 'CMD {0}\n'.format(script)
 
     def create_dockerfile(self, path):
         f = open(path + '/Dockerfile', 'w')

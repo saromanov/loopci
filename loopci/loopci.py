@@ -80,6 +80,9 @@ class Loopci:
                 cons.expose_port(port_value)
         if isinstance(ports, str):
             cons.expose_port(ports)
+        script = getConfigItem(conf, 'script')
+        if script is not None:
+            cons.add_exec_script(script)
         cons.create_dockerfile(outpath)
         logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
