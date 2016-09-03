@@ -46,8 +46,6 @@ class Loopci:
             logging.error(".loopci.hcl is empty")
             return
 
-        #current_dir = self._createDir()
-        #os.chdir(current_dir)
         logging.info("Start construction of Dockerfile")
         cons = construct.Construct("Fun construction")
         if 'image' not in conf:
@@ -89,7 +87,6 @@ class Loopci:
         dockermanager = docker.DockerManager()
         container_name = dockermanager.build(outpath)
         logging.info("Start Docker container {0}".format(container_name))
-
         try:
             dockermanager.start(container_name)
             print("Passed")
