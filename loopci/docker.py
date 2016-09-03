@@ -30,7 +30,7 @@ class DockerManager:
     def start(self, image_name):
         #Run image
         dockerrun = sh.Command('docker')
-        dockerrun('run', '-i', '-d', 'first/image')
+        dockerrun('run', '-i', '-d', image_name)
 
     def kill(self, id):
         ''' Kill image by id
