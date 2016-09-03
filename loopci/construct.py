@@ -129,5 +129,9 @@ class RestrictConstruct(BaseConstruct):
     def addInstallPackages(self, items):
         if len(items) == 0:
             return
+    def create_dockerfile(self, path):
+        f = open(path + '/Dockerfile', 'w')
+        f.write(self.result)
+        f.close()
 
 

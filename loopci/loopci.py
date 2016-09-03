@@ -66,6 +66,7 @@ class Loopci:
         ports = getConfigItem(conf, 'ports')
         for port_key, port_value in ports.items():
             cons.expose_port(port_value)
+        cons.create_dockerfile(outpath)
         '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
