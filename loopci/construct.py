@@ -137,8 +137,8 @@ class RestrictConstruct(BaseConstruct):
         self.result += 'CMD {0}\n'.format(script)
 
     def create_dockerfile(self, path):
-        f = open(path + '/Dockerfile', 'w')
-        f.write(self.result)
-        f.close()
+        docker_file = open(path + '/Dockerfile', 'w')
+        docker_file.write(self.result)
+        docker_file.f.close()
 
 
