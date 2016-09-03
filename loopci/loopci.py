@@ -88,11 +88,13 @@ class Loopci:
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
         container_name = dockermanager.build(outpath)
-        #logging.info("Start Docker container")
-        #dockermanager.start(container_name)
-        #manager = docker.DockerManager()
-        #docker = sh.Command("sudo docker -t build")
-        #docker()
+        logging.info("Start Docker container {0}".format(container_name))
+
+        try:
+            dockermanager.start(container_name)
+            print("Passed")
+        except Exception:
+            print("unable")
 
 
 def getConfigItem(conf, name):

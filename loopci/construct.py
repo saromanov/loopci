@@ -139,6 +139,6 @@ class RestrictConstruct(BaseConstruct):
     def create_dockerfile(self, path):
         docker_file = open(path + '/Dockerfile', 'w')
         docker_file.write(self.result)
-        docker_file.f.close()
+        docker_file.close()
 
 
