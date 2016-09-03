@@ -42,7 +42,6 @@ class Loopci:
         #os.chdir(current_dir)
         logging.info("Start construction of Dockerfile")
         cons = construct.Construct("Fun construction")
-        print(conf)
         if 'image' not in conf:
             #Build with default image
             cons = construct.RestrictConstruct("Fun construction")
@@ -64,6 +63,9 @@ class Loopci:
         env = getConfigItem(conf, 'env')
         for env_key, env_value in env.items():
             cons.add_env_variable(env_key, env_value)
+        ports = getConfigItem(conf, 'ports')
+        for port_key, port_value in ports.items():
+            cons.expose_port(port_value)
         '''logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
