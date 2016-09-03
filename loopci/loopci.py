@@ -4,6 +4,8 @@ import asyncio
 import os
 import math
 import logging
+import random
+import string
 
 import docker
 import construct
@@ -13,10 +15,16 @@ logging.basicConfig(level=logging.DEBUG)
 
 class Loopci:
     def __init__(self, *args, **kwargs):
-        pass
+        self.work_dir = ''
 
     def _createDir(self):
         return "dir"
+
+    def create_workdir_py(self, image_len=15):
+        ''' create worker dir for the python
+        '''
+        random_name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(image_len))
+        return '/home/{0}'.format(random_name)
 
     def _dirExist(self, path):
         return os.path.isdir(path)
@@ -56,6 +64,9 @@ class Loopci:
                 cons.addOS(image['name'], version=image['version'])
             else:
                 const.addOS(image['name'])
+        #copy worker dirs(for now its a python)
+        dir_name = self.create_workdir_py()
+        cons.add_workdir(dir_name)
         before = getConfigItem(conf, 'before_install')
         for script_key, script_value in before.items():
             cons.addScript(script_key, script_value)
@@ -73,9 +84,9 @@ class Loopci:
         logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
-        dockermanager.build(outpath)
-        logging.info("Start Docker container")
-        dockermanager.start()
+        container_name = dockermanager.build(outpath)
+        #logging.info("Start Docker container")
+        #dockermanager.start(container_name)
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()

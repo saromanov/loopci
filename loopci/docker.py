@@ -23,14 +23,14 @@ class DockerManager:
         os.chdir(path)
         dockerbuild = sh.Command('docker')
         random_name = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(image_len))
-        image_name = '{0}'.format(random_name)
+        image_name = 'loopci/{0}'.format(random_name)
         dockerbuild('build', '-t', image_name.lower(), path)
         return image_name
 
     def start(self, image_name):
         #Run image
         dockerrun = sh.Command('docker')
-        print(dockerrun('run', '-i', '-d', 'first/image'))
+        dockerrun('run', '-i', '-d', 'first/image')
 
     def kill(self, id):
         ''' Kill image by id

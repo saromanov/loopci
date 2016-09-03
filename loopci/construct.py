@@ -129,6 +129,11 @@ class RestrictConstruct(BaseConstruct):
     def addInstallPackages(self, items):
         if len(items) == 0:
             return
+    def add_workdir(self, dirname):
+        self.result += 'RUN mkdir {0}'.format(dirname)
+        self.result += 'COPY {0} .'.format(dirname)
+        self.result += 'WORDIR {0}'.format(dirname)
+
     def create_dockerfile(self, path):
         f = open(path + '/Dockerfile', 'w')
         f.write(self.result)
