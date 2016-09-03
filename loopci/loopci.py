@@ -70,12 +70,12 @@ class Loopci:
         if isinstance(ports, str):
             cons.expose_port(ports)
         cons.create_dockerfile(outpath)
-        '''logging.info("Finished to construction Dockerfile")
+        logging.info("Finished to construction Dockerfile")
         logging.info("Start to build Docker container")
         dockermanager = docker.DockerManager()
         dockermanager.build(outpath)
         logging.info("Start Docker container")
-        dockermanager.start()'''
+        dockermanager.start()
         #manager = docker.DockerManager()
         #docker = sh.Command("sudo docker -t build")
         #docker()
